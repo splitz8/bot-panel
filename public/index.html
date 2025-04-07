@@ -1,0 +1,33 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Control del Bot de Telegram</title>
+</head>
+<body>
+  <h1>Panel de Control del Bot</h1>
+  <form method="POST" action="/update">
+    <label>
+      <input type="checkbox" name="activo" id="activo"> Bot Activo
+    </label>
+    <br><br>
+    <label>
+      Frecuencia (minutos):
+      <input type="number" name="frecuenciaMinutos" min="1" value="10">
+    </label>
+    <br><br>
+    <button type="submit">Guardar Cambios</button>
+  </form>
+
+  <script>
+    // Obtener valores actuales
+    fetch('/config')
+      .then(response => response.json())
+      .then(data => {
+        document.getElementById('activo').checked = data.activo;
+        document.querySelector('input[name="frecuenciaMinutos"]').value = data.frecuenciaMinutos;
+      });
+  </script>
+</body>
+</html>
